@@ -91,6 +91,17 @@
             color: #d33a58;
         }
 
+        /* Edit Link Styling */
+        .task-card a.edit-link {
+            color: #0b6095; /* Distinct color for Edit link */
+            transition: color 0.3s;
+            margin-left: 10px;
+        }
+
+        .task-card a.edit-link:hover {
+            color: #3c8bb4; /* Darker shade on hover for Edit link */
+        }
+
         /* Footer Styling */
         footer {
             text-align: center;
@@ -128,6 +139,7 @@
                         <h3><%= val %></h3>
                         <p class="text-gray-400 mb-4">Detailed information about this task.</p>
                         <a href="/file/<%= val %>">Read More</a>
+                        <a   class="edit-link" href="/edit/<%=val%>" >Edit</a>
                     </div>
                 <% }) %>
             <% } else { %>
@@ -137,8 +149,4 @@
     </div>
 
     <!-- Footer -->
-    <footer class="mt-12">
-        <p>© 2024 Task Manager. Made with dedication.</p>
-    </footer>
-</body>
-</html>
+    <footer class="mt
