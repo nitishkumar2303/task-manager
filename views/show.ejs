@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= filename %> - Task Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom Dark Theme */
+        body {
+            background-color: #0b0b0d;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #d4d4d8;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Link Styling */
+        .back-link {
+            color: #e94560;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #d33a58;
+        }
+
+        /* Title Styling */
+        .page-title {
+            font-size: 3rem;
+            margin-top: 20px;
+            color: #e94560;
+            text-align: center;
+        }
+
+        /* Content Styling */
+        .content {
+            background: #16161a;
+            border-radius: 8px;
+            padding: 30px;
+            max-width: 800px;
+            margin: 20px auto;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Description Styling */
+        .description {
+            font-size: 1.25rem;
+            margin-top: 15px;
+            line-height: 1.6;
+            color: #d4d4d8;
+        }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 30px;
+            color: #828282;
+        }
+    </style>
+</head>
+<body>
+    <div class="main w-full min-h-screen bg-zinc-900 p-10 text-white">
+        <a class="back-link inline-block mb-10" href="/">Go back to home</a>
+        <h1 class="page-title"><%= filename %></h1>
+        <div class="content">
+            <p class="description"><%= data %></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Task Manager. All rights reserved.</p>
+    </footer>
+</body>
+</html>
