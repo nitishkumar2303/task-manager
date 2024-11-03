@@ -5,141 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Manager</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Custom Dark Theme */
-        body {
-            background-color: #0b0b0d;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #d4d4d8;
-            padding: 0;
-            margin: 0;
-        }
-
-        /* Header Styling */
-        .header-title {
-            color: #e94560;
-            font-weight: 700;
-            font-size: 2.8rem;
-            letter-spacing: 1px;
-        }
-
-        /* Form Styling */
-        .form-container {
-            background: #16161a;
-            border-radius: 8px;
-            padding: 30px;
-            max-width: 600px;
-            margin: 0 auto;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .form-container input,
-        .form-container textarea {
-            background: #1c1c1f;
-            color: #d4d4d8;
-            border: none;
-            padding: 12px 15px;
-            font-size: 1rem;
-            margin-top: 12px;
-            border-radius: 5px;
-            width: 100%;
-            transition: background 0.2s;
-        }
-
-        .form-container input[type="submit"] {
-            background: #e94560;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-
-        .form-container input[type="submit"]:hover {
-            background: #d33a58;
-        }
-
-        /* Task Card Styling */
-        .task-card {
-            background: #1b1b1f;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
-            width: 100%;
-            max-width: 300px;
-            margin: 10px;
-            text-align: left;
-            transition: transform 0.2s;
-        }
-
-        .task-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .task-card h3 {
-            color: #f8f8f8;
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-        }
-
-        .task-card a {
-            color: #e94560;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        .task-card a:hover {
-            color: #d33a58;
-        }
-
-        /* Edit Link Styling */
-        .task-card a.edit-link {
-            color: #0b6095; /* Distinct color for Edit link */
-            transition: color 0.3s;
-            margin-left: 10px;
-        }
-
-        .task-card a.edit-link:hover {
-            color: #3c8bb4; /* Darker shade on hover for Edit link */
-        }
-
-        /* Footer Styling */
-        footer {
-            text-align: center;
-            padding: 10px 0;
-            border-top: 1px solid #282846;
-            color: #828282;
-        }
-    </style>
 </head>
-<body>
+<body class="bg-gray-900 text-gray-200 font-sans">
+
     <!-- Page Container -->
     <div class="container mx-auto p-6">
-        
+
         <!-- Header -->
         <header class="text-center mb-10">
-            <h1 class="header-title">Task Manager</h1>
-            <p class="text-gray-500">Organize your tasks with ease</p>
+            <h1 class="text-5xl font-extrabold text-gray-50 mb-2">Task Manager</h1>
+            <p class="text-gray-400 text-lg">Organize your tasks efficiently</p>
         </header>
 
         <!-- Task Creation Form -->
-        <section class="form-container">
-            <h2 class="text-xl font-semibold mb-5 text-gray-200">Add a New Task</h2>
-            <form action="/create" method="post" class="space-y-5">
-                <input type="text" name="title" placeholder="Task Title">
-                <textarea name="details" rows="4" placeholder="Task Details"></textarea>
-                <input type="submit" value="Create Task">
+        <section class="bg-gray-800 rounded-lg p-8 max-w-lg mx-auto shadow-lg mb-8">
+            <h2 class="text-3xl font-semibold text-gray-100 mb-5">Add a New Task</h2>
+            <form action="/create" method="post" class="space-y-4">
+                <input type="text" name="title" placeholder="Task Title" class="w-full p-3 rounded-md bg-gray-700 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200">
+                <textarea name="details" rows="4" placeholder="Task Details" class="w-full p-3 rounded-md bg-gray-700 text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200"></textarea>
+                <input type="submit" value="Create Task" class="w-full bg-indigo-600 hover:bg-indigo-500 text-gray-100 font-bold py-3 rounded-md cursor-pointer transition duration-200">
             </form>
         </section>
 
         <!-- Task Display Section -->
-        <section class="tasks mt-12 flex flex-wrap justify-center gap-6">
+        <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <% if (files.length > 0) { %>
                 <% files.forEach(function(val) { %>
-                    <div class="task-card">
-                        <h3><%= val %></h3>
+                    <div class="bg-gray-800 rounded-lg p-6 shadow-lg transition-transform transform hover:scale-105">
+                        <h3 class="text-2xl font-semibold text-gray-100 mb-2"><%= val %></h3>
                         <p class="text-gray-400 mb-4">Detailed information about this task.</p>
-                        <a href="/file/<%= val %>">Read More</a>
-                        <a   class="edit-link" href="/edit/<%=val%>" >Edit</a>
+                        <div class="flex justify-between mt-4">
+                            <a href="/file/<%= val %>" class="text-sm font-semibold text-indigo-400 hover:text-indigo-300 transition-colors">Read More</a>
+                            <div>
+                            <a href="/edit/<%= val %>" class="text-sm font-semibold text-indigo-400 hover:text-indigo-300 transition-colors">Edit</a>
+                            <a href="/delete/<%= val %>" class="text-sm font-semibold text-red-400 hover:text-red-300 transition-colors p-5">Delete</a>
+                            </div>    
+                        </div>     
                     </div>
                 <% }) %>
             <% } else { %>
@@ -149,4 +50,9 @@
     </div>
 
     <!-- Footer -->
-    <footer class="mt
+    <footer class="mt-12 text-center text-gray-500 border-t border-gray-700 py-4">
+        <p>© 2024 Task Manager. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

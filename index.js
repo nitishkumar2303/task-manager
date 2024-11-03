@@ -17,12 +17,16 @@ app.get('/' ,(req,res)=>{
     
 })
 
+app.get('/edit/:filename' ,(req,res)=>{
+    res.render('edit' , {filename:req.params.filename});
+})
+
 app.get('/file/:fileName' ,(req,res)=>{
 
     fs.readFile(`./files/${req.params.fileName}`  ,"utf-8" , (err,data)=>{
         // res.render("file" , {data:data});
-        console.log(data);
-        res.render("show", {filename:req.params.fileName , data:data});
+        const formatData = data.replace(/\n/g , "<br>");
+        res.render("show", {filename:req.params.fileName , data:formatData});
     })
     
 })
@@ -37,6 +41,17 @@ app.post('/create' ,(req,res)=>{
         }
         res.redirect('/');
     })
+    
+})
+
+app.post('/edit/:filename' ,(req,res)=>{
+  
+   fs.rename(path.join(__dirname,`/files/${req.body.name}`), path.join(__dirname,`/files/${req.body.newname}`), (err)=>{
+       if(err){
+           console.log(err);
+       }
+       res.redirect('/');
+   })
     
 })
 
